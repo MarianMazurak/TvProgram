@@ -6,22 +6,23 @@ import java.util.List;
 public class Day {
 
 	public static enum Days {
-		MONDAY,
-		TUESDAY,
-		WEDNESDAY,
-		THURSDAY,
-		FRIDAY,
-		SATURDAY,
-		SUNDAY
+		MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 	}
 
 	private Days day;
-	private List<Film> films;
-	private List<TVShow> tvShows;
+
+	private List<Content> listContent = new ArrayList<Content>();
 
 	public Day() {
-		this.films = new ArrayList<Film>();
-		this.tvShows = new ArrayList<TVShow>();
+
+	}
+
+	public List<Content> getListContent() {
+		return listContent;
+	}
+
+	public void setListContent(List<Content> listContent) {
+		this.listContent = listContent;
 	}
 
 	public Days getDay() {
@@ -30,22 +31,6 @@ public class Day {
 
 	public void setDay(Days day) {
 		this.day = day;
-	}
-
-	public List<Film> getFilms() {
-		return films;
-	}
-
-	public void setFilms(List<Film> films) {
-		this.films = films;
-	}
-
-	public List<TVShow> getTvShows() {
-		return tvShows;
-	}
-
-	public void setTvShows(List<TVShow> tvShows) {
-		this.tvShows = tvShows;
 	}
 
 }

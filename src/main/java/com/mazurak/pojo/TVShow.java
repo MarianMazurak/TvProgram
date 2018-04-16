@@ -6,9 +6,9 @@ public class TVShow extends Content {
 
 	private String type;
 
-	public TVShow(String type, String name,LocalTime localTime) {
-		this.type = type;
+	public TVShow(String name, String type, LocalTime localTime) {
 		this.name = name;
+		this.type = type;
 		this.localTime = localTime;
 	}
 
