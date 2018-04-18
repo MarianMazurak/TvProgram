@@ -11,9 +11,10 @@ public class Day {
 
 	private Days day;
 
-	private List<Content> listContent = new ArrayList<Content>();
+	private List<Content> listContent;
 
 	public Day() {
+	this.listContent = new ArrayList<Content>();
 
 	}
 

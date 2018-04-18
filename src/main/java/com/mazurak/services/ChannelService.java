@@ -12,7 +12,7 @@ import com.mazurak.pojo.TVShow;
 
 public abstract class ChannelService {
 
-	private Day day;
+	private Day day = new Day();// if coment will excption java.lang.NullPointerException
 
 	public void printChannelMenu() {
 
@@ -28,12 +28,30 @@ public abstract class ChannelService {
 	public Day chooseDay(String nameOfDay) {
 		System.out.println(
 				"Your choise is: " + Days.valueOf(nameOfDay.toUpperCase()) + "\nPlease add Content in this day");
-		System.out.println("enter please name of film,  ratings,hour,minute");
+		System.out.println("enter please name of Content,  ratings(or type if t show),hour,minute");
 		return new Day();
 
 	}
 
-	public void createContent(String name, Integer ratings, int hour, int minute) {
+	private void addContent(Scanner scan) {
+
+		boolean isOnGoing = true;
+		while (isOnGoing) {
+			String name = scan.next();
+			try {
+				createContent(name, scan.nextInt(), scan.nextInt(), scan.nextInt());
+			} catch (InputMismatchException e) {
+				createContent(name, scan.next(), scan.nextInt(), scan.nextInt());
+			}
+			System.out.println("Do you watn exit if yes enter 0 else enter 1 ");
+			if (scan.nextInt() == 0) {
+				isOnGoing = false;
+			}
+		}
+
+	}
+
+	public void createContent(String name, int ratings, int hour, int minute) {
 		Film film = new Film(name, ratings, LocalTime.of(hour, minute));
 		addToList(film);
 		System.out.println("you add new Film" + film.getName() + " in time " + film.getLocalTime());
@@ -43,29 +61,11 @@ public abstract class ChannelService {
 
 		TVShow tvShow = new TVShow(name, type, LocalTime.of(hour, minute));
 		addToList(tvShow);
-		System.out.println("you add new Film" + " in time " + tvShow.getLocalTime());
+		System.out.println("you add new tvShow  : " + tvShow.getName() + " in time " + tvShow.getLocalTime());
 	}
 
 	private void addToList(Content content) {
 		day.getListContent().add(content);
-	}
-
-	private void addContent(Scanner scan) {
-
-		boolean isOnGoing = true;
-		while (isOnGoing) {
-			String name = scan.next(); 
-			try {
-				createContent(name, scan.nextInt(), scan.nextInt(), scan.nextInt());
-			} catch (InputMismatchException e) {
-				createContent(name, scan.next(), scan.nextInt(), scan.nextInt());
-			}
-			System.out.println("Do you watn exit if yes enter 0 ");
-			if (scan.nextInt() == 0) {
-				isOnGoing = false;
-			}
-		}
-
 	}
 
 }
