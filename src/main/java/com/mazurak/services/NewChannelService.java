@@ -1,22 +1,27 @@
 package com.mazurak.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mazurak.pojo.Day;
 
 public class NewChannelService extends ChannelService {
 
-	private Day day;
+	private List<Day> days;
 
 	public NewChannelService() {
-		this.day = day; // new Day(); // if coment will excption java.lang.NullPointerException
+		this.days = new ArrayList<>();
 
 	}
 
-	public Day getDay() {
-		return day;
+	public List<Day> getDays() {
+		return days;
 	}
 
-	public void setDay(Day day) {
-		this.day = day;
+	public void setDays(List<Day> days) {
+		this.days = days;
 	}
+
+	
 
 }
