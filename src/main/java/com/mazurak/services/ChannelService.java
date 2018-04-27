@@ -12,24 +12,26 @@ import com.mazurak.pojo.TVShow;
 
 public abstract class ChannelService {
 
-	private Day day = new Day();// if coment will excption java.lang.NullPointerException
+	private Day day;// if coment will excption java.lang.NullPointerException
 
 	public void printChannelMenu() {
 
 		try (Scanner scan = new Scanner(System.in)) {
 
 			System.out.println("Choose Day");
-			chooseDay(scan.next());
+			Day day = createDay(scan.next());
 			addContent(scan);
 		}
 
 	}
 
-	public Day chooseDay(String nameOfDay) {
+	public Day createDay(String nameOfDay) {
 		System.out.println(
 				"Your choise is: " + Days.valueOf(nameOfDay.toUpperCase()) + "\nPlease add Content in this day");
 		System.out.println("enter please name of Content,  ratings(or type if t show),hour,minute");
-		return new Day();
+		Day day = new Day();
+		day.setDay(Days.valueOf(nameOfDay));
+		return day;
 
 	}
 
