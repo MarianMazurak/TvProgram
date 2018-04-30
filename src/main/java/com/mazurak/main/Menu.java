@@ -11,12 +11,12 @@ public class Menu {
 
 	public static void main(String[] args) {
 
-		printMenu();
+		printMainMenu();
 	}
 
-	public static void printMenu() {
+	public static void printMainMenu() {
 		try (Scanner scan = new Scanner(System.in)) {
-
+			
 			System.out.println(" Enter \n 1 : New Channel \n 2 : ICTV \n 3 : Inter Channel ");
 			int res = scan.nextInt();
 			ChannelService channelService = returnService(res);
