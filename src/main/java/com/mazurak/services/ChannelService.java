@@ -29,15 +29,21 @@ public abstract class ChannelService {
 
 	public Content addContent(Scanner scan) {
 
-		Content content = null;
-		//String name = scan.next();
+		String name = scan.next();
+		int rating = 0;
+		String type = null;
 		try {
-			content = createContent(scan.next(), scan.nextInt(), scan.nextInt(), scan.nextInt());
+			rating = scan.nextInt();
 		} catch (InputMismatchException e) {
-			content = createContent(scan.next(), scan.next(), scan.nextInt(), scan.nextInt());
+			type = scan.next();
 		}
-		return content;
-
+		int hour = scan.nextInt();
+		int min = scan.nextInt();
+		if (type == null) {
+			return createContent(name, type, hour, min);
+		} else {
+			return createContent(name, rating, hour, min);
+		}
 	}
 
 	public Content createContent(String name, int ratings, int hour, int minute) {
@@ -47,13 +53,12 @@ public abstract class ChannelService {
 	}
 
 	public Content createContent(String name, String type, int hour, int minute) {
-
 		TVShow tvShow = new TVShow(name, type, LocalTime.of(hour, minute));
 		System.out.println("you added new tvShow  : " + tvShow.getName() + " on time " + tvShow.getLocalTime());
 		return tvShow;
 	}
 
-	protected void printMenu() {
+	public void printMenu() {
 		System.out.println("enter new day press 0 ");
 		System.out.println("enter new Channel enter 1");
 		System.out.println("enter more content enter 2");

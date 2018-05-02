@@ -16,8 +16,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor()
 public class NewChannelService extends ChannelService {
-
-	private List<Day> days  = new ArrayList<>();
+	private List<Day> days = new ArrayList<>();
 
 	public void printChannelMenu() {
 
@@ -49,5 +48,12 @@ public class NewChannelService extends ChannelService {
 		}
 
 	}
+
+	// public void createDayaddContentaddToListPrintMenu(Day day, Content content) {
+	// day = createDay(scan.next());
+	// content = addContent(scan);
+	// day.getListContent().add(content);
+	// printMenu();
+	// }
 
 }
