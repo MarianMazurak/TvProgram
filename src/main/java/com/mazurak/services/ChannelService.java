@@ -2,8 +2,10 @@ package com.mazurak.services;
 
 import java.time.LocalTime;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
+import com.mazurak.main.Menu;
 import com.mazurak.pojo.Content;
 import com.mazurak.pojo.Day;
 import com.mazurak.pojo.Day.Days;
@@ -17,7 +19,9 @@ public abstract class ChannelService {
 
 	public abstract void printChannelMenu();
 
-	public Day createDay(String nameOfDay) {
+	public Day createDay(Scanner scan) {
+		System.out.println("Choose Day");
+		String nameOfDay = scan.next();
 		System.out.println(
 				"Your choise is: " + Days.valueOf(nameOfDay.toUpperCase()) + "\nPlease add Content in this day");
 		System.out.println("enter please name of Content,  ratings(or type if t show),hour,minute");
@@ -63,4 +67,27 @@ public abstract class ChannelService {
 		System.out.println("enter new Channel enter 1");
 		System.out.println("enter more content enter 2");
 	}
+
+	protected void addCreatedContentToListAndPrintMenu(Scanner scan, Day day) {
+		Content content = addContent(scan);
+		day.getListContent().add(content);
+		printMenu();
+	}
+
+	protected void bicycleForMethds(Scanner scan, Day day, boolean isOnGoing, List<Day> days) {
+		while (isOnGoing) {
+			int res = scan.nextInt();
+			if (res == 0) {
+				days.add(day);
+				day = createDay(scan);
+				addCreatedContentToListAndPrintMenu(scan, day);
+			} else if (res == 1) {
+				Menu.printMainMenu();
+			} else if (res == 2) {
+				addCreatedContentToListAndPrintMenu(scan, day);
+			}
+		}
+
+	}
+
 }
