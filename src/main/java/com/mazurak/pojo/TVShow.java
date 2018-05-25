@@ -2,7 +2,16 @@ package com.mazurak.pojo;
 
 import java.time.LocalTime;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class TVShow extends Content {
+
+	private static final long serialVersionUID = 1L;
 
 	private String type;
 
@@ -10,19 +19,6 @@ public class TVShow extends Content {
 		this.name = name;
 		this.type = type;
 		this.localTime = localTime;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	@Override
-	public String toString() {
-		return "TVShow [type=" + type + "]";
 	}
 
 }

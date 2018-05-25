@@ -18,7 +18,7 @@ public class ICTVChannelService extends ChannelService {
 			addCreatedContentToListAndPrintMenu(scan, day);
 			boolean isOnGoing = true;
 
-			bicycleForMethds(scan, day, isOnGoing, days);
+			bicycleForMethods(scan, day, isOnGoing, days);
 		}
 
 	}

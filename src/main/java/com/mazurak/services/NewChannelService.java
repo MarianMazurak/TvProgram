@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.mazurak.main.Menu;
 import com.mazurak.pojo.Day;
 
 import lombok.Data;
@@ -25,7 +24,7 @@ public class NewChannelService extends ChannelService {
 			addCreatedContentToListAndPrintMenu(scan, day);
 			boolean isOnGoing = true;
 
-			bicycleForMethds(scan, day, isOnGoing,days);
+			bicycleForMethods(scan, day, isOnGoing,days);
 		}
 
 	}

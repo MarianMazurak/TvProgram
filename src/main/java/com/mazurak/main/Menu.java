@@ -26,9 +26,10 @@ public class Menu {
 	}
 
 	public static ChannelService returnService(int i) {
-
+		
 		switch (i) {
 		case 1: {
+			
 			return new NewChannelService();
 		}
 		case 2: {
@@ -38,7 +39,7 @@ public class Menu {
 			return new InterChannelService();
 		}
 		default:
-			System.out.println("Incorect");
+			System.out.println("Incorrect");
 			break;
 		}
 		return null;

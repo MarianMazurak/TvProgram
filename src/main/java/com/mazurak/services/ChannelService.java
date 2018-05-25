@@ -1,5 +1,8 @@
 package com.mazurak.services;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.time.LocalTime;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -17,6 +20,10 @@ import lombok.Data;
 @Data
 public abstract class ChannelService {
 
+	private static final int NEW_DAY_CHOICE = 0;
+	private static final int CONTINUE_ADD_CONTENT_CHOICE = 2;
+	private static final int NEW_CHANNEL_CHOICE = 1;
+
 	public abstract void printChannelMenu();
 
 	public Day createDay(Scanner scan) {
@@ -27,6 +34,7 @@ public abstract class ChannelService {
 		System.out.println("enter please name of Content,  ratings(or type if t show),hour,minute");
 		Day day = new Day();
 		day.setDay(Days.valueOf(nameOfDay.toUpperCase()));
+
 		return day;
 
 	}
@@ -74,18 +82,42 @@ public abstract class ChannelService {
 		printMenu();
 	}
 
-	protected void bicycleForMethds(Scanner scan, Day day, boolean isOnGoing, List<Day> days) {
+	protected void bicycleForMethods(Scanner scan, Day day, boolean isOnGoing, List<Day> days) {
 		while (isOnGoing) {
 			int res = scan.nextInt();
-			if (res == 0) {
+			if (res == NEW_DAY_CHOICE) {
 				days.add(day);
 				day = createDay(scan);
 				addCreatedContentToListAndPrintMenu(scan, day);
-			} else if (res == 1) {
+			} else if (res == NEW_CHANNEL_CHOICE) {
+				String channelName = this.getClass().getSimpleName().replace("Service", "");
+				saveDataIntoFile(channelName, days);
+
 				Menu.printMainMenu();
-			} else if (res == 2) {
+			} else if (res == CONTINUE_ADD_CONTENT_CHOICE) {
 				addCreatedContentToListAndPrintMenu(scan, day);
 			}
+		}
+
+	}
+
+	private void saveDataIntoFile(String nameOfFile, List<Day> days) {
+
+		String filePath = nameOfFile + ".txt";
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(filePath);
+
+			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fos);
+			for (Day day : days) {
+				for(Content content : day.getListContent()) {
+					objectOutputStream.writeObject(content);
+				}
+				//objectOutputStream.writeObject(day);
+			}
+				objectOutputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}
